@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile.dev
     container_name: binary-buddies-dev
     ports:
-      - "5173:5173"
+      - "6533:6533"
     volumes:
       - .:/app
       - /app/node_modules

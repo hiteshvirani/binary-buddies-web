@@ -224,7 +224,7 @@ export const ProblemSolver = () => {
           viewport={{ once: true }}
           className="max-w-6xl mx-auto mb-16"
         >
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3">
             {workflowStages.map((stage, index) => {
               const isActive = currentStage === index;
               const isCompleted = completedStages.includes(index);
@@ -233,7 +233,7 @@ export const ProblemSolver = () => {
                 <button
                   key={stage.id}
                   onClick={() => handleStageClick(index)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  className={`px-3 py-2 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-all duration-300 ${
                     isActive 
                       ? 'bg-primary text-primary-foreground shadow-glow' 
                       : isCompleted 
@@ -241,7 +241,10 @@ export const ProblemSolver = () => {
                         : 'bg-muted/50 text-muted-foreground hover:bg-muted'
                   }`}
                 >
-                  {index + 1}. {stage.title}
+                  <span className="hidden sm:inline">{index + 1}. </span>
+                  <span className="sm:hidden">{index + 1}</span>
+                  <span className="hidden md:inline">{stage.title}</span>
+                  <span className="md:hidden">{stage.title.split(' ')[0]}</span>
                 </button>
               );
             })}
@@ -251,7 +254,7 @@ export const ProblemSolver = () => {
         {/* Workflow Visualization with Grid Layout */}
         <div className="relative max-w-7xl mx-auto">
           {/* Workflow Stages Grid */}
-          <div className="grid grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
             {workflowStages.map((stage, index) => {
               const isActive = currentStage === index;
               const isCompleted = completedStages.includes(index);
@@ -269,7 +272,7 @@ export const ProblemSolver = () => {
                   onClick={() => handleStageClick(index)}
                 >
                   {/* Stage Card */}
-                  <div className={`glass p-6 rounded-xl relative overflow-hidden text-center backdrop-blur-xl bg-card/60 transition-all duration-300 h-full ${
+                  <div className={`glass p-4 md:p-6 rounded-xl relative overflow-hidden text-center backdrop-blur-xl bg-card/60 transition-all duration-300 h-full ${
                     isActive ? 'border-2 border-primary shadow-glow' : 
                     isCompleted ? 'border border-primary/50' : 'border border-muted'
                   }`}>
@@ -297,12 +300,12 @@ export const ProblemSolver = () => {
                     
                     
                     {/* Stage Icon */}
-                    <div className={`inline-flex p-4 rounded-xl mb-4 ${
+                    <div className={`inline-flex p-3 md:p-4 rounded-xl mb-3 md:mb-4 ${
                       isActive ? `bg-${stage.color}/20 shadow-glow` : 
                       isCompleted ? `bg-${stage.color}/10` : 'bg-muted/20'
                     }`}>
                       {React.createElement(stage.icon, {
-                        className: `w-8 h-8 ${
+                        className: `w-6 h-6 md:w-8 md:h-8 ${
                           isActive ? `text-${stage.color}` : 
                           isCompleted ? `text-${stage.color}` : 'text-muted-foreground'
                         }`
@@ -310,7 +313,7 @@ export const ProblemSolver = () => {
                     </div>
                     
                     {/* Stage Title */}
-                    <h3 className={`text-lg font-bold mb-3 ${
+                    <h3 className={`text-base md:text-lg font-bold mb-2 md:mb-3 ${
                       isActive ? 'text-gradient' : 
                       isCompleted ? 'text-foreground' : 'text-muted-foreground'
                     }`}>
@@ -318,7 +321,7 @@ export const ProblemSolver = () => {
                     </h3>
                     
                     {/* Stage Description */}
-                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                    <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4 leading-relaxed">
                       {stage.description}
                     </p>
                     

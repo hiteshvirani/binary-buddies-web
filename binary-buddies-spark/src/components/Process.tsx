@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Search, Lightbulb, Code2, Rocket, Settings, CheckCircle } from "lucide-react";
 
 const steps = [
@@ -42,62 +41,64 @@ const steps = [
 
 export const Process = () => {
   return (
-    <section className="relative py-24 overflow-hidden bg-gradient-to-b from-background to-background/50">
+    <section className="relative py-24 pt-32 md:pt-24 overflow-hidden bg-gradient-to-b from-background to-background/50">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             Our <span className="text-gradient">Process</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             A proven methodology that delivers exceptional results every time
           </p>
-        </motion.div>
+        </div>
 
-        <div className="max-w-5xl mx-auto relative">
-          {/* Vertical Line - positioned on the left */}
-          <div className="absolute left-8 md:left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary" />
+        <div className="w-full max-w-5xl mx-auto relative">
+          {/* Vertical Line - positioned on the left, hidden on mobile */}
+          <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary hidden md:block" />
 
-          {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="relative mb-16 md:pl-20"
-            >
-              {/* Step Number Circle */}
-              <div className="absolute left-4 md:left-0 top-0 w-16 h-16 -translate-x-1/2 glass rounded-full flex items-center justify-center z-10 hover-glow">
-                <span className="text-2xl font-bold text-gradient">{index + 1}</span>
-              </div>
+          {/* Cards Container - Always vertical stack */}
+          <div className="w-full flex flex-col gap-6 md:gap-16">
+            {steps.map((step, index) => (
+              <div
+                key={index}
+                className="w-full relative"
+              >
+                {/* Step Number Circle - Desktop only */}
+                <div className="absolute left-0 top-0 w-16 h-16 -translate-x-1/2 glass rounded-full items-center justify-center z-10 hover-glow hidden md:flex">
+                  <span className="text-2xl font-bold text-gradient">{index + 1}</span>
+                </div>
 
-              {/* Content - all aligned to the right */}
-              <div className="glass p-8 rounded-xl ml-20 md:ml-12 group hover-glow cursor-pointer transition-all duration-300 hover:scale-105">
-                <div className="flex items-start gap-4">
-                  <div className={`p-4 rounded-xl bg-primary/10 group-hover:shadow-glow transition-all duration-300`}>
-                    <step.icon className="w-8 h-8 text-primary" />
+                {/* Mobile Step Number - visible only on mobile */}
+                <div className="flex md:hidden items-center gap-3 mb-4 w-full">
+                  <div className="w-10 h-10 glass rounded-full flex items-center justify-center hover-glow flex-shrink-0">
+                    <span className="text-lg font-bold text-gradient">{index + 1}</span>
                   </div>
-                  
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold mb-2 text-foreground group-hover:text-gradient transition-all duration-300">
-                      {step.title}
-                    </h3>
-                    <p className="text-primary font-semibold mb-3">
-                      Duration: {step.duration}
-                    </p>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {step.description}
-                    </p>
+                  <div className="h-0.5 flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
+                </div>
+
+                {/* Content Card - Full width on mobile */}
+                <div className="glass p-6 md:p-8 rounded-xl md:ml-12 w-full group hover-glow cursor-pointer transition-all duration-300 hover:scale-105">
+                  <div className="flex flex-col md:flex-row items-start gap-4 w-full">
+                    <div className="p-3 md:p-4 rounded-xl bg-primary/10 group-hover:shadow-glow transition-all duration-300 flex-shrink-0">
+                      <step.icon className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+                    </div>
+                    
+                    <div className="flex-1 w-full">
+                      <h3 className="text-xl md:text-2xl font-bold mb-2 text-foreground group-hover:text-gradient transition-all duration-300">
+                        {step.title}
+                      </h3>
+                      <p className="text-sm md:text-base text-primary font-semibold mb-3">
+                        Duration: {step.duration}
+                      </p>
+                      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 

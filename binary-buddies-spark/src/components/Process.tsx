@@ -59,34 +59,28 @@ export const Process = () => {
         </motion.div>
 
         <div className="max-w-5xl mx-auto relative">
-          {/* Vertical Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary" />
+          {/* Vertical Line - positioned on the left */}
+          <div className="absolute left-8 md:left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary" />
 
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className={`relative mb-16 ${
-                index % 2 === 0 ? "md:pr-1/2 md:text-right" : "md:pl-1/2 md:ml-auto"
-              }`}
+              className="relative mb-16 md:pl-20"
             >
               {/* Step Number Circle */}
-              <div className="absolute left-4 md:left-1/2 top-0 w-16 h-16 -translate-x-1/2 glass rounded-full flex items-center justify-center z-10 hover-glow">
+              <div className="absolute left-4 md:left-0 top-0 w-16 h-16 -translate-x-1/2 glass rounded-full flex items-center justify-center z-10 hover-glow">
                 <span className="text-2xl font-bold text-gradient">{index + 1}</span>
               </div>
 
-              {/* Content */}
-              <div className={`glass p-8 rounded-xl ml-20 md:ml-0 ${
-                index % 2 === 0 ? "md:mr-12" : "md:ml-12"
-              } group hover-glow cursor-pointer transition-all duration-300 hover:scale-105`}>
-                <div className={`flex items-start gap-4 ${
-                  index % 2 === 0 ? "md:flex-row-reverse md:text-right" : "md:flex-row md:text-left"
-                }`}>
-                  <div className={`p-4 rounded-xl bg-${index % 2 === 0 ? 'primary' : 'accent'}/10 group-hover:shadow-glow transition-all duration-300`}>
-                    <step.icon className={`w-8 h-8 text-${index % 2 === 0 ? 'primary' : 'accent'}`} />
+              {/* Content - all aligned to the right */}
+              <div className="glass p-8 rounded-xl ml-20 md:ml-12 group hover-glow cursor-pointer transition-all duration-300 hover:scale-105">
+                <div className="flex items-start gap-4">
+                  <div className={`p-4 rounded-xl bg-primary/10 group-hover:shadow-glow transition-all duration-300`}>
+                    <step.icon className="w-8 h-8 text-primary" />
                   </div>
                   
                   <div className="flex-1">
